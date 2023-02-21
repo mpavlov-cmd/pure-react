@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <div id="root">React is NOT rendered</div>
+    <script type="text/javascript" src="https://unpkg.com/react@18.0.0-rc.0/umd/react.development.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/react-dom@18.0.0-rc.0/umd/react-dom.development.js"></script>
+    <script type="text/javascript">
 
+        // Create functional component
+        const Person = props => {
+            return React.createElement('div', {}, [
+                React.createElement('h1', {key: 'person-heading'}, props.name),
+                React.createElement('p', {key: 'person-occupation'}, props.occupation)
+            ])
+        }
+
+        // Create application
+        const App = () => {
+            return React.createElement('div', {}, [
+                React.createElement('h1', {className: 'title', key: 'heading-0'}, 'React is Rendered'),
+                React.createElement(Person, {name: 'Max', occupation: 'Developer', key: 'person-0'}, null),
+                React.createElement(Person, {name: 'Ira', occupation: 'Housekeeper', key: 'person-1'}, null),
+                React.createElement(Person, {name: 'Val', occupation: 'Designer', key: 'person-2'}, null),
+            ])
+        };
+
+        // Render react
+        const container = document.getElementById('root');
+        const root      = ReactDOM.createRoot(container);
+
+        root.render(React.createElement(App));
+    </script>
 </body>
 </html>
